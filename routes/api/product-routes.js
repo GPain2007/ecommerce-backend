@@ -9,19 +9,17 @@ router.get("/", (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    attributes: [
-      "catergory_id",
-      "price",
-      "stock",
-      "product_name",
-      "product_id",
-    ],
+    attributes: ["id", "price", "stock", "product_name", "category_id"],
     include: [
       {
         model: Category,
-        Tag,
-        attributes: ["catergory_id", "tag_id"],
+
+        attributes: ["category_name"],
       },
+      // {
+      //   model: Tag,
+      //   attributes: ["tag_name", "id"],
+      // },
     ],
   })
     .then((seedProducts) => res.json(seedProducts))
@@ -39,18 +37,12 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: [
-      "catergory_id",
-      "price",
-      "stock",
-      "product_name",
-      "product_id",
-    ],
+    attributes: ["id", "price", "stock", "product_name", "category_id"],
     include: [
       {
         model: Category,
         Tag,
-        attributes: ["catergory_id", "tag_id"],
+        attributes: ["category_name", "tag_name"],
       },
     ],
   })

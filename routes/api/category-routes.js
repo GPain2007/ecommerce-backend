@@ -8,12 +8,12 @@ router.get("/", (req, res) => {
   // be sure to include its associated Products
   // Access our User model and run .findAll() method)
   Category.findAll({
-    attributes: ["catergory_name"],
+    attributes: ["id", "category_name"],
     include: [
       {
         model: Product,
 
-        attributes: ["catergory_id", "price", "stock", "product_name"],
+        attributes: ["id", "product_name", "price", "stock", "category_id"],
       },
     ],
   })
@@ -31,12 +31,12 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["catergory_name"],
+    attributes: ["id", "category_name"],
     include: [
       {
         model: Product,
 
-        attributes: ["catergory_id", "price", "stock", "product_name"],
+        attributes: ["id", "product_name", "price", "stock", "category_id"],
       },
     ],
   })
