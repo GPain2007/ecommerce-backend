@@ -11,18 +11,21 @@ router.get("/", (req, res) => {
     include: [
       {
         model: Product,
-        ProductTag,
-        attributes: [
-          "product_id",
-          "tag_id",
-          "catergory_id",
-          "price",
-          "stock",
-          "product_name",
-        ],
+        as: "productTag",
+
+        attributes: ["price", "product_name", "stock"],
       },
     ],
   })
+    // ProductTag.findAll({
+    //   attributes: ["tag_id"],
+    //   include: [
+    //     {
+    //       model: Tag,
+    //       attributes: ["tag_name"],
+    //     },
+    //   ],
+    // })
     .then((seedProducts) => res.json(seedProducts))
     .catch((err) => {
       console.log(err);
@@ -37,12 +40,12 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["tag_name"],
+    attributes: ["id", "tag_name"],
     include: [
       {
         model: Product,
-
-        attributes: ["tag_id", "product_id"],
+        as: "productTag",
+        attributes: ["price", "product_name", "stock"],
       },
     ],
   })
@@ -66,7 +69,7 @@ router.post("/", (req, res) => {
   })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
+      if (req.body.tagIds) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
             product_id: product.id,

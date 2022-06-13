@@ -55,10 +55,8 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   // create a new category
-  Category.findOne({
-    where: {
-      id: req.params.id,
-    },
+  Category.create({
+    category_name: req.body.category_name,
   })
     .then((categoryData) => {
       if (!categoryData) {
