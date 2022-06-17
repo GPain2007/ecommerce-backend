@@ -2,6 +2,10 @@
 
 https://github.com/GPain2007/ecommerce-backend
 
+
+https://user-images.githubusercontent.com/97716889/174211240-90f184f0-8bbb-4d12-a677-0f483950e958.mp4
+
+
 The code is to show routes from the TAGs
 
 
